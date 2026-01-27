@@ -570,59 +570,51 @@ body::after {
 }
 
 .projects {
+  display: block;
+  width: 100%;
+}
+
+
+
+.card-header {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between; /* separa texto e imagem */
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* separa texto e imagem */
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .project-list {
+  display: none;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto 80px auto;
-}
-
-.project-list {
+  margin: 0 auto 60px auto;
   padding: 20px;
   border-radius: 16px;
   background: rgba(0,0,0,0.4);
   border: 1px solid rgba(94,231,231,0.2);
 }
 
-
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* separa texto e imagem */
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* separa texto e imagem */
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.project-list {
-  display: none;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 .project-list.active {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 
-/* Quando estiver no modo TODOS */
 .project-list.hide-title h2 {
   display: none;
 }
+
 
 
 
@@ -666,4 +658,116 @@ body::after {
     margin: 20px auto 0 auto;
     text-align: center;
     max-width: 700px;   /* controla a largura da linha */
+}
+
+/* ===========================
+   MOBILE FIX (RESPONSIVO)
+   =========================== */
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 80px; /* em vez de % */
+  }
+
+  /* NAV */
+  .nav {
+    padding: 12px 16px;
+  }
+
+  /* TÍTULOS / TOPICOS */
+  .topicos h4 {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .topicos h4::after {
+    margin: 8px auto 0 auto;
+  }
+
+  /* ABOUT */
+  .about {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .texto {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .texto h1 {
+    font-size: 26px;
+  }
+
+  .texto p {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  /* FOTO */
+  .foto img {
+    width: 220px;
+    height: 220px;
+    transform: none;
+  }
+
+  .foto::before {
+    width: 240px;
+    height: 240px;
+  }
+
+  /* SKILLS */
+  .skills {
+    padding: 0 20px;
+  }
+
+  .skills-grid {
+    padding: 0;
+  }
+
+  /* PROJECTS */
+  .projects {
+    padding: 0 20px;
+  }
+
+  .tech-cards {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .mini-card {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* TEXTO BLOG */
+  .texto-blog h1 {
+    font-size: 28px;
+  }
+
+  .texto-blog p {
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .footer-container {
+    gap: 40px;
+  }
+
+  .footer-nav,
+  .footer-social {
+    width: 100%;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
 }
