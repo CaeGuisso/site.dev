@@ -1,3 +1,4 @@
+// Tudo dentro do defer, garante que o HTML carregou
 // ---------- Elementos ----------
 const chatToggle = document.getElementById("chat-toggle");
 const chatbot = document.getElementById("chatbot");
@@ -20,11 +21,9 @@ function appendMessage(sender, text) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// ---------- Função de resposta do bot ----------
+// ---------- Resposta automática do bot ----------
 function botResponse(msg) {
   let response = "";
-
-  // Lógica do bot
   switch(msg.toLowerCase()) {
     case "recrutador":
       response = "Ótimo! Você quer saber mais sobre oportunidades ou parcerias?";
@@ -41,8 +40,6 @@ function botResponse(msg) {
     default:
       response = "Não entendi, mas estou aprendendo!";
   }
-
-  // Delay para parecer mais natural
   setTimeout(() => appendMessage("Bot", response), 500);
 }
 
@@ -50,7 +47,6 @@ function botResponse(msg) {
 sendBtn.addEventListener("click", () => {
   const text = userInput.value.trim();
   if (!text) return;
-
   appendMessage("Você", text);
   userInput.value = "";
   botResponse(text);

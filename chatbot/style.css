@@ -36,7 +36,7 @@
   font-family: Arial, sans-serif;
 }
 
-/* Cabeçalho do chat */
+/* Cabeçalho */
 #chat-header {
   background-color: #0084ff;
   color: white;
@@ -95,7 +95,7 @@
   cursor: pointer;
 }
 
-/* Quick actions */
+/* Quick Actions */
 #quick-actions {
   display: flex;
   justify-content: space-around;
