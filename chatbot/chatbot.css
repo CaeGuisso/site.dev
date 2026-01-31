@@ -1,0 +1,164 @@
+/* ==============================
+   GUISSOBOT — CHATBOT WIDGET
+   ============================== */
+
+#chat-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #6c5ce7;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,.3);
+  z-index: 9999;
+}
+
+#chatbot {
+  position: fixed;
+  bottom: 95px;
+  right: 25px;
+  width: 340px;
+  height: 460px;
+  background: #0f0f14;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+/* HEADER */
+#chat-header {
+  padding: 14px;
+  background: #161622;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* MENSAGENS */
+#chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* BOLHAS */
+#chat-messages .message {
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#chat-messages .user {
+  background: #6c5ce7;
+  color: #fff;
+  align-self: flex-end;
+}
+
+#chat-messages .bot {
+  background: #1f1f2e;
+  color: #eaeaea;
+  align-self: flex-start;
+}
+
+/* AÇÕES RÁPIDAS */
+#quick-actions {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  flex-wrap: wrap;
+  background: #12121a;
+}
+
+#quick-actions button {
+  flex: 1;
+  border: none;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: #1f1f2e;
+  color: #ccc;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#quick-actions button:hover {
+  background: #6c5ce7;
+  color: #fff;
+}
+
+/* INPUT */
+#chat-input {
+  display: flex;
+  padding: 10px;
+  background: #161622;
+  gap: 8px;
+}
+
+#chat-input input {
+  flex: 1;
+  background: #0f0f14;
+  border: 1px solid #2b2b3c;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #fff;
+  outline: none;
+}
+
+#chat-input button {
+  background: #6c5ce7;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ESCONDER */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+/* ==============================
+   SCROLLBAR SABRE DE LUZ
+   ============================== */
+
+#chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+  background: #6c5ce7;
+  border-radius: 999px;
+  box-shadow:
+    0 0 6px #6c5ce7,
+    0 0 12px #6c5ce7,
+    0 0 18px #6c5ce7;
+}
+
+/* efeito hover (mais poder 😈) */
+#chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #a29bfe;
+  box-shadow:
+    0 0 8px #a29bfe,
+    0 0 16px #a29bfe,
+    0 0 24px #a29bfe;
+}
