@@ -260,104 +260,79 @@
 
 </footer>
 <script>
-(function() {
-  const langButton = document.getElementById('langButton');
-  const langDropdown = document.getElementById('langDropdown');
-  const langText = document.getElementById('langText');
-  const root = document.getElementById('langRoot');
+(function () {
+  const langButton = document.getElementById("langButton");
+  const langDropdown = document.getElementById("langDropdown");
+  const langText = document.getElementById("langText");
 
-  // Detecta idioma via URL (/en prefix) ou localStorage
-  function currentLangFromUrl() {
-    return location.pathname.startsWith('/en/') || location.pathname === '/en' ? 'en' : 'pt';
+  const PT_TO_EN = {
+    "/": "/",
+    "/projetos": "/projects",
+    "/blog": "/blog",
+    "/bots": "/bots"
+  };
+
+  const EN_TO_PT = {
+    "/": "/",
+    "/projects": "/projetos",
+    "/blog": "/blog",
+    "/bots": "/bots"
+  };
+
+  function normalize(path) {
+    return path.replace(/\/+$/, "") || "/";
   }
 
-  function updateLabel(lang) {
-    langText.textContent = lang.toUpperCase();
+  function isEN() {
+    return location.pathname.startsWith("/en");
   }
 
-  // Abre / fecha o dropdown
-  langButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langDropdown.classList.toggle('active');
-  });
-
-  // Fecha ao clicar fora
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.lang')) {
-      langDropdown.classList.remove('active');
+  function getBasePath() {
+    let path = normalize(location.pathname);
+    if (path.startsWith("/en")) {
+      path = path.replace("/en", "");
+      return normalize(path);
     }
+    return path;
+  }
+
+  function getTarget(lang) {
+    const base = getBasePath();
+
+    if (lang === "en") {
+      const target = PT_TO_EN[base] ?? base;
+      return target === "/" ? "/en/" : "/en" + target;
+    }
+
+    // EN → PT (CORRIGIDO)
+    const target = EN_TO_PT[base] ?? base;
+    return target === "/" ? "/" : target;
+  }
+
+  function updateLabel() {
+    langText.textContent = isEN() ? "EN" : "PT";
+  }
+
+  langButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    langDropdown.classList.toggle("active");
   });
 
-  // Quando o usuário clica numa opção
-  langDropdown.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const chosen = btn.dataset.lang;
-      // salva escolha
-      localStorage.setItem('site_lang', chosen);
+  document.addEventListener("click", () => {
+    langDropdown.classList.remove("active");
+  });
 
-      // calcula o novo caminho mantendo a "mesma página"
-      const path = location.pathname;
-      let target;
-
-      if (chosen === 'en') {
-        // já está em /en? então apenas atualiza label
-        if (path.startsWith('/en/')) {
-          target = path;
-        } else if (path === '/' || path === '/index.html') {
-          target = '/en/';
-        } else {
-          // evitar //, adicionar '/en' na frente do pathname
-          target = '/en' + (path.startsWith('/') ? path : '/' + path);
-        }
-      } else { // chosen === 'pt'
-        if (path.startsWith('/en/')) {
-          // remove o /en prefix
-          target = path.slice(3) || '/';
-        } else if (path === '/en' || path === '/en/') {
-          target = '/';
-        } else {
-          target = path;
-        }
-      }
-
-      // Navega para a URL calculada
-      // se já estiver nessa URL, apenas atualiza label e aplica tradução (single-file fallback)
-      if (location.pathname === target) {
-        updateLabel(chosen);
-        applyLanguage(chosen);
-        langDropdown.classList.remove('active');
-      } else {
-        // redireciona
-        location.href = target + location.search + location.hash;
-      }
+  langDropdown.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = btn.dataset.lang;
+      location.href = getTarget(lang) + "/";
     });
   });
 
-  // Função para aplicar traduções via data-i18n (opcional, útil se quiser single-file)
-  function applyLanguage(lang) {
-    // O objeto "translations" só funciona se você manter traduções no mesmo arquivo.
-    // Caso seu site use páginas estáticas separadas (/en/...), ignore essa parte.
-    if (window.translations && typeof window.translations === 'object') {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (window.translations[lang] && window.translations[lang][key]) {
-          el.textContent = window.translations[lang][key];
-        }
-      });
-    }
-  }
-
-  // Inicializa: ajusta label conforme URL ou localStorage
-  const langFromUrl = currentLangFromUrl();
-  const saved = localStorage.getItem('site_lang') || langFromUrl;
-  // se URL e saved divergem (ex: user foi direto para /en), priorize URL
-  const initialLang = langFromUrl === 'en' ? 'en' : saved;
-  updateLabel(initialLang);
-  // aplica traduções se estiver usando single-file translations
-  applyLanguage(initialLang);
-
+  updateLabel();
 })();
 </script>
+
 
   </div>
 </body>
