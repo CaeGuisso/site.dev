@@ -35,6 +35,7 @@ jobs:
             cp -r chatbot dist
             cp bots.css dist
             cp bots.html dist
+            cp -r en dist
 
 
       - name: Upload Pages artifact
