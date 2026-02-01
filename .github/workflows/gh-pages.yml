@@ -32,9 +32,9 @@ jobs:
             cp style.css dist
             cp -r chatbot dist
             cp -r en dist
-            cp -r projetos
-            cp -r blog
-            cp -r bots
+            cp -r projetos dist
+            cp -r blog dist
+            cp -r bots dist
 
 
       - name: Upload Pages artifact
