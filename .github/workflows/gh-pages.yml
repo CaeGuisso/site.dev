@@ -27,15 +27,14 @@ jobs:
       - name: Copy all files to dist
         run: |
             cp -R img dist
-            cp projects.html dist
-            cp blog.html dist
             cp index.html dist
             cp script.js dist
             cp style.css dist
             cp -r chatbot dist
-            cp bots.css dist
-            cp bots.html dist
             cp -r en dist
+            cp -r projetos
+            cp -r blog
+            cp -r bots
 
 
       - name: Upload Pages artifact
